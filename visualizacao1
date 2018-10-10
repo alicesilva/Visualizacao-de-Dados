@@ -1,0 +1,33 @@
+{
+   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/nazareno/eleicoes-sumario-tidy/master/data/comparecimento_tidy_long.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"votos": "number"}
+    }
+  },
+  "width": 500,
+  "height": 200,
+  
+  "transform": [
+     {"filter": {"field": "situacao", "oneOf": ["VOTOS EM BRANCO", "VOTOS NULOS", "VOTOS NOS CANDIDATOS"]}},
+     {"filter": {"field": "ano", "range": [1989, 2006]}}
+  ],
+  "mark": "line",
+  "encoding": {
+    "x":{
+      "field": "ano",
+      "type": "nominal"
+    },
+    "y":{
+      "field": "votos",
+      "aggregate": "mean",
+      "type" : "quantitative"
+    },
+    "color": {
+      "field": "situacao",
+      "type": "nominal"
+    }
+  }
+}

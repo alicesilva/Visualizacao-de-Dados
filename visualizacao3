@@ -1,0 +1,29 @@
+{
+   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/nazareno/eleicoes-sumario-tidy/master/data/partidos_tidy_long.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"votos": "number"}
+    }
+  },
+  "width": 600,
+  "height": 200,
+  
+  "transform": [
+     {"filter": {"field": "ano", "range": [1989, 2006]}}
+  ],
+  "mark": {"type":"bar"},
+  "encoding": {
+    "y":{
+      "field": "votos",
+      "aggregate": "sum",
+      "type": "quantitative"
+    },
+    "x":{
+      "field": "partido",
+      "type" : "nominal"
+    },
+    "color": {"field": "ano", "type": "nominal"}
+  }
+}

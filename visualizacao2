@@ -1,0 +1,33 @@
+{
+   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/nazareno/eleicoes-sumario-tidy/master/data/validos_vs_demais.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"proporcao": "number"}
+    }
+  },
+  "width": 600,
+  "height": 100,
+  
+  "transform": [
+     {"filter": {"field": "ano", "range": [1989, 2006]}}
+  ],
+  "mark": {"type":"rect"},
+  "encoding": {
+    "y":{
+      "field": "situacao",
+      "type": "nominal"
+    },
+    "x":{
+      "field": "estado",
+      "type" : "nominal"
+    },
+    "color": {
+      "field": "proporcao",
+      "aggregate": "mean",
+      "type": "quantitative"
+    },
+    "row": {"field": "ano", "type": "nominal"}
+  }
+}
